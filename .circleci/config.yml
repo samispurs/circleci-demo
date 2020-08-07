@@ -5,8 +5,7 @@ jobs:
     docker:
       - image: circleci/python:3.6.1
     environment:
-      CIRCLE_BRANCH: development
-      environment: spatel-lab
+      environment: development
     steps:
       - checkout
       - run:

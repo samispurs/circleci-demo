@@ -7,4 +7,4 @@ deployments:
     regions:
       - us-east-1
     account-id:
-      spatel-lab: 480349811592
+      development: 480349811592
