@@ -9,13 +9,14 @@ jobs:
       - run:
           name: Setup Python Virtual Environment
           command: |
+            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin
             pip install --upgrade --user pip 
             pip install -r requirements.txt            
       - run:
           name: Install Terraform Binary
           command: |
             mkdir -p /tmp/terraform
-            https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
+            curl https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
             cp /tmp/terraform/terraform /usr/local/bin/
       - run:
