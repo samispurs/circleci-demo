@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Install the AWS CLI
           command: |
-            pip3 install --user pipenv
+            pip install --user pipenv
             pipenv install -r requirements.txt
       - run:
           name: Install Terraform Binary
