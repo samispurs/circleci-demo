@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Setup Python Environment
           command: |
-            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:/tmp/terraform
+            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:
             pip install --upgrade --user pip 
             pip install -r requirements.txt            
       - run:
@@ -20,7 +20,9 @@ jobs:
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
       - run:
           name: Terraform Init
-          command: terraform init
+          command: |
+            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:/tmp/terraform
+            terraform init
 workflows:
   main:
     jobs:
