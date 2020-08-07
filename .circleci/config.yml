@@ -7,9 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Setup Python Virtual Environment
+          name: Setup Python Environment
           command: |
-            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin
+            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:/tmp/terraform
             pip install --upgrade --user pip 
             pip install -r requirements.txt            
       - run:
@@ -18,7 +18,6 @@ jobs:
             mkdir -p /tmp/terraform
             curl https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
-            cp /tmp/terraform/terraform /usr/local/bin/
       - run:
           name: Terraform Init
           command: terraform init
