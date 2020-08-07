@@ -4,6 +4,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.1
+    environment:
+      CIRCLE_BRANCH: development
+      environment: development
     steps:
       - checkout
       - run:
@@ -19,10 +22,11 @@ jobs:
             curl https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
       - run:
-          name: Terraform Init
+          name: Runway Test
           command: |
             export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:/tmp/terraform
-            terraform init
+            export DEPLOY_ENVIRONMENT=$environment
+            runway test            
 workflows:
   main:
     jobs:
