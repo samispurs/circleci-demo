@@ -22,11 +22,12 @@ jobs:
             curl https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
       - run:
-          name: Runway Test
+          name: Runway Plan
           command: |
             export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:/tmp/terraform
             export DEPLOY_ENVIRONMENT=$environment
-            runway test            
+            export CI=yes
+            runway plan           
 workflows:
   main:
     jobs:
