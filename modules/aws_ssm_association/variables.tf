@@ -1,0 +1,2 @@
+variable aws_ssm_association_aws_ssm_document {}
+variable aws_ssm_association_aws_instance_id {}
