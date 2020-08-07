@@ -1,0 +1,10 @@
+---
+deployments:
+  - modules:
+      - path: backend.tf
+      - path: networking.tf
+      - path: dev_ssm_parameters.tf
+    regions:
+      - us-east-1
+    account-id:
+      spatel-lab: 480349811592
