@@ -6,7 +6,7 @@ jobs:
       - image: circleci/python:3.6.1
     environment:
       CIRCLE_BRANCH: development
-      environment: development
+      environment: spatel-lab
     steps:
       - checkout
       - run:
