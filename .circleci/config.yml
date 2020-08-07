@@ -1,0 +1,30 @@
+version: 2.1
+
+orbs:
+  python: circleci/python:3.6.1
+
+jobs:
+  build:
+    executor: python/default
+    steps:
+      - checkout
+      - run:
+          name: Install the AWS CLI
+          command: |
+            pip3 install --user pipenv
+            pipenv install -r requirements.txt
+      - run:
+          name: Install Terraform Binary
+          command: |
+            export PATH=$PATH:/usr/local/bin
+            mkdir -p /tmp/terraform
+            https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
+            unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
+            cp /tmp/terraform/terraform /usr/local/bin/
+      - run:
+          name: Terraform Init
+          command: terraform init
+workflows:
+  main:
+    jobs:
+      - build
