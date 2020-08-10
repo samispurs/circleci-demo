@@ -29,10 +29,10 @@ jobs:
           name: Testing ParameterStore load
           command: |
             echo 'Print out ENV VAR DB_PASSWORD'
-            echo $DB_PASSWORD
+            echo ${DB_PASSWORD}
             echo 'Source parameterstore file'
             source /tmp/parameterstore/PARAMETERSTORESOURCEFILE
-            echo $DB_PASSWORD
+            echo ${DB_PASSWORD}
       - run:
           name: Runway Plan
           command: |
