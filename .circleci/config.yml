@@ -18,7 +18,7 @@ jobs:
             pip install --upgrade --user pip 
             pip install -r requirements.txt
       - aws-parameter-store/load:
-          filter: "Key=Name,Values=DB_PASSWORD"          
+          filter: "Key=Name,Values=DB_PASSWORD"    
       - run:
           name: Install Terraform Binary
           command: |
@@ -26,6 +26,7 @@ jobs:
             curl https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
             echo $DB_PASSWORD
+            cat /tmp/parameterstore/PARAMETERSTORESOURCEFILE
 
       - run:
           name: Runway Plan
