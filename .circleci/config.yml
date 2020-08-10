@@ -31,7 +31,6 @@ jobs:
           shell: "/bin/bash -eo pipefail"
           command: |
             while IFS= read -r line; do echo $line >> $BASH_ENV; done < /tmp/parameterstore/PARAMETERSTORESOURCEFILE
-            echo ${DB_PASSWORD}
       - run:
           name: Runway Plan
           command: |
