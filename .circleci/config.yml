@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  aws-parameter-store: circleci/aws-parameter-store@1.0.
+
 jobs:
   build:
     docker:
@@ -13,7 +16,9 @@ jobs:
           command: |
             export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:
             pip install --upgrade --user pip 
-            pip install -r requirements.txt            
+            pip install -r requirements.txt
+      - aws-parameter-store/load:
+          filter: "Key=Name,Values=/slack/sam-onica-test"          
       - run:
           name: Install Terraform Binary
           command: |
