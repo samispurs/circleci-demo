@@ -25,9 +25,13 @@ jobs:
             mkdir -p /tmp/terraform
             curl https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip -o /tmp/terraform/terraform_0.12.10_linux_amd64.zip
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
+      - run:
+          name: Testing ParameterStore load
+          command: |
+            echo 'Print out ENV VAR DB_PASSWORD'
             echo $DB_PASSWORD
-            cat /tmp/parameterstore/PARAMETERSTORESOURCEFILE
-
+            echo 'Source parameterstore file'
+            source /tmp/parameterstore/PARAMETERSTORESOURCEFILE
       - run:
           name: Runway Plan
           command: |
