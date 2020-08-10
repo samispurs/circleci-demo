@@ -32,6 +32,7 @@ jobs:
             echo $DB_PASSWORD
             echo 'Source parameterstore file'
             source /tmp/parameterstore/PARAMETERSTORESOURCEFILE
+            echo $DB_PASSWORD
       - run:
           name: Runway Plan
           command: |
