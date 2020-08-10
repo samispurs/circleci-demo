@@ -14,11 +14,12 @@ jobs:
       - run:
           name: Setup Python Environment
           command: |
-            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:
+            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin
+            echo 'export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:/tmp/terraform' >> $BASH_ENV
             pip install --upgrade --user pip 
             pip install -r requirements.txt
       - aws-parameter-store/load:
-          filter: "Key=Name,Values=DB_PASSWORD"    
+          filter: "Key=Name,Values=DB_PASSWORD"
       - run:
           name: Install Terraform Binary
           command: |
@@ -27,16 +28,14 @@ jobs:
             unzip /tmp/terraform/terraform_0.12.10_linux_amd64.zip -d /tmp/terraform/
       - run:
           name: Testing ParameterStore load
+          shell: "/bin/bash -eo pipefail"
           command: |
-            echo 'Print out ENV VAR DB_PASSWORD'
-            echo ${DB_PASSWORD}
-            echo 'Source parameterstore file'
-            source /tmp/parameterstore/PARAMETERSTORESOURCEFILE
+            while IFS= read -r line; do echo $line >> $BASH_ENV; done < /tmp/parameterstore/PARAMETERSTORESOURCEFILE
             echo ${DB_PASSWORD}
       - run:
           name: Runway Plan
           command: |
-            export PATH=$PATH:/usr/local/bin:/home/circleci/.local/bin:/tmp/terraform
+            echo ${DB_PASSWORD}
             export DEPLOY_ENVIRONMENT=$environment
             export CI=yes
             runway plan           
